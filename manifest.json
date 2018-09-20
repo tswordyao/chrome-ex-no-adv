@@ -1,0 +1,46 @@
+
+{
+  "manifest_version": 2,
+  "name": "no-adv-iframe",
+  "description": "no-advtisement-iframe",
+  "version": "1.0.0",
+
+  "browser_action": {
+    "desc":"设置 content scripts 以及什么时候注入什么类型的页面",
+    "default_icon-": "img/icon.png",
+    "default_popup": "pop/index.html"
+  },
+ 
+  "content_scripts": [{
+    "matches": [
+      "*://www.cnblogs.com/*",
+      "*://inance.ifeng.com/*",
+      "*://blog.csdn.net/*",
+      "https://zhidao.baidu.com/*",
+      "https://wwww.baidu.com/*",
+      "http://www.360doc.com/*",
+      "http://www.techug.com/*",
+      "http://www.jb51.net/*",
+      "http://www.runoob.com/*"
+    ],
+    "css-":["styles/styles.css"],
+    "js": [
+      "ct/index.js"
+    ],
+    "run_at": "document_start"
+  }],
+
+  "background": {
+    "scripts": [
+      "bg/index.js"
+    ]
+  },
+
+
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "storage",
+    "unlimitedStorage"
+  ]
+}
