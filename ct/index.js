@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded',e=>{
                 '.pulllog-box',
                 '.meau-gotop-box',
                 '.recommend-right',
+                '.div_body #main_right',
                 'iframe'
             ].forEach(s=>{
                 document.querySelectorAll(s).forEach( ele => ele.setAttribute('style',(ele.getAttribute('style')||'')+';visibility:hidden!important;') );
@@ -34,22 +35,23 @@ document.addEventListener('DOMContentLoaded',e=>{
 
     chrome.extension.onMessage.addListener(
         function(request, sender, sendResponse) {
-            document.querySelectorAll('img').forEach(ele => {
+            document.querySelectorAll(request.selector).forEach(ele => {
                 ele.remove();
             });
-            alert("前端/后端/Popup收到");
-            sendResponse("popup返回值");
+            console.log("onMessage.addListener, 前端/后端/Popup收到:",request, sender);
+            sendResponse("ct手动消息并给出popup返回值：ok");
+            console.log(document.querySelector('.div_body #main_right'))
         }
     );
 });
 
-1||chrome.extension.onRequest.addListener( (request, sender, sendResponse) => {
+chrome.extension.onRequest.addListener( (request, sender, sendResponse) => {
       console.log( sender.tab ?
-                   "from a content script:" + sender.tab.url :
-                   "from the extension" );
+                   "onRequest.addListener, from a content script:" + sender.tab.url :
+                   "onRequest.addListener, from the extension" );
                   
       if (request.cmd == "no-frame"){
-        document.querySelectorAll('img').forEach(ele => {
+        document.querySelectorAll('iframe').forEach(ele => {
             ele.remove();
         });
         sendResponse({feedback: "done"});
