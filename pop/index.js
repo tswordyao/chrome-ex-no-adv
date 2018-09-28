@@ -21,15 +21,15 @@ const handleObj={
     handleEvent(e){
         console.log(this, e, this.ext, this.bg)
         //bg.testBg('try use bg object')
-        1||chrome.tabs.getSelected(null, function(tab) {
+        chrome.tabs.getSelected(null, function(tab) {
             chrome.tabs.sendRequest(tab.id, {cmd: "no-frame"}, function(res) {
               console.log(res && res.feedback);
             });
           });
 
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs){  
-            chrome.tabs.sendMessage(tabs[0].id, {message:"calculate"}, function(response) {
-                alert( response==null ? "response为空" : response);
+            chrome.tabs.sendMessage(tabs[0].id, {selector:"frame"}, function(response) {
+                response==null? alert("response为空") : console.log(response);
             });//end  sendMessage   
         }); //end query
         
