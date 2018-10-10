@@ -49,7 +49,7 @@ var slice=Function.prototype.call.bind([].slice);
             console.log(document.querySelector('.div_body #main_right'))
         }
     );
-});
+//});
 
 chrome.extension.onRequest.addListener( (request, sender, sendResponse) => {
       console.log( sender.tab ?
