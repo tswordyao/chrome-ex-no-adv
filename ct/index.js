@@ -23,6 +23,8 @@ var slice=Function.prototype.call.bind([].slice);
                 '.pulllog-box',
                 '.meau-gotop-box',
                 '.recommend-right',
+                '.main.mb10.clearfix',//51jb
+                '.w350.fr',//'.article-right', //51jb
                 '.div_body #main_right',
                 'iframe'
             ].forEach(s=>{
