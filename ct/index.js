@@ -20,6 +20,8 @@ var slice=Function.prototype.call.bind([].slice);
                 'bdsharebuttonbox',
                 'box_ad01',
                 'blockR',
+                '.indexSuperise',
+                '#csdn-toolbar',
                 '.pulllog-box',
                 '.meau-gotop-box',
                 '.recommend-right',
