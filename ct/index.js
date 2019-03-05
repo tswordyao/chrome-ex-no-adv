@@ -21,6 +21,7 @@ var slice=Function.prototype.call.bind([].slice);
                 'box_ad01',
                 'blockR',
                 '.indexSuperise',
+                '#note-fixed-ad-container',
                 '#csdn-toolbar',
                 '.pulllog-box',
                 '.meau-gotop-box',
