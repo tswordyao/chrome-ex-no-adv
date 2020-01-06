@@ -9,11 +9,17 @@
     <style>
     body{width:320px;height:160px; }
     button{margin:10px;padding:5px; }
+    input{width:150px;padding:0 5px;}
     </style>
 </head>
 <body>
-    <button id=no-frame>去iframe</button>
-    <button id=no-gif>去gif</button>
-    <button id=no-img>去img</button>
+    <button id=no-frame selector="iframe">去iframe</button>
+    <button id=no-gif selector=[src*=".gif"]>去gif</button>
+    <button id=no-img selector="img">去img</button>
+    <input id="diy-title-input" placeholder="title"/>
+    <button id="diy-title">diy-title</button>
+    <input id="show-date-input" placeholder="date"/>
+    <button id="show-date">show-date</button>
+    <input id="date-result" />
 </body>
 </html>

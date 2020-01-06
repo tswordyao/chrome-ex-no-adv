@@ -4,7 +4,7 @@ let config={
   // 以下是显示在 `chrome-settings-extensions` 中的信息
   "name": "my_extension",
   "version": "1.0",
-  "description": "学习js,学习chrome插件制作demo",
+  "description": "chrome插件",
 
   // 默认图标,可以设置不同尺寸,chrome会根据实际情况适配
   "icons": {
@@ -30,6 +30,7 @@ let config={
   },
   "permissions": [ //权限限制
       //允许访问的网站
+      "http://trooper-test.edutest.hz.netease.com/",
       "http://flash.weather.com.cn/",
       "https://www.baidu.com/",
       "http://pv.sohu.com/",

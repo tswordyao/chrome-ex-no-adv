@@ -13,17 +13,19 @@
  
   "content_scripts": [{
     "matches": [
+      "*://trooper-test.edutest.hz.netease.com/*",
       "*://www.cnblogs.com/*",
       "*://inance.ifeng.com/*",
       "*://blog.csdn.net/*",
       "*://www.bkjia.com/*",
       "*://www.jb51.net/article/*",
+      "http://doc.hz.netease.com/pages/viewpage.action*",
       "https://zhidao.baidu.com/*",
-      "https://wwww.baidu.com/*",
-      "http://www.360doc.com/*",
-      "http://www.techug.com/*",
-      "http://www.jb51.net/*",
-      "http://www.runoob.com/*"
+      "https://www.baidu.com/*",
+      "*://www.360doc.com/*",
+      "*://www.techug.com/*",
+      "*://www.jb51.net/*",
+      "*://www.runoob.com/*"
     ],
     "css-":["styles/styles.css"],
     "js": [
