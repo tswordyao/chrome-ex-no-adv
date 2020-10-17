@@ -10,6 +10,8 @@ var slice=Function.prototype.call.bind([].slice);
         var style='';
         try{
             [   '.wgt-daily',
+                '#passportbox.login-box',//blog.csdn
+                '.login-mark',
                 '#content_right.cr-offset',
                 '#content_left [style*="visibility:visible !important"]',
                 '#footer[role="contentinfo"]',
@@ -17,6 +19,7 @@ var slice=Function.prototype.call.bind([].slice);
                 '.widget-sma',
                 '.cms-scroll',
                 '#mainBox>aside',
+                '.main-content~.side-content',
                 '.meau-list',
                 'newsfeed',
                 '.recommend-box',

@@ -61,28 +61,68 @@ const handleObj={
 
     }
 };
+
+function copyTxt(str){
+    var ta= document.createElement('textarea');
+    ta.readOnly = true;
+    ta.innerText=str;
+    ta.style.opacity='0';
+    ta.style.position='fixed';
+    ta.left=-1000;
+    ta.top=-1000;
+    document.body.appendChild(ta);
+    ta.select();
+    ta.setSelectionRange(0, ta.value.length);
+    return new Promise(resolve=>{
+        try{
+            resolve(!!document.execCommand("Copy"))
+          }catch(e){
+            resolve(false)
+            console.warn(e)
+          }finally{
+            document.body.removeChild(ta);
+          }
+    })
+  }
+
+  function addZero(v){
+    return v>9? v: ('0'+v)
+  }
+
+function showDate(){
+    var val = g['show-date-input'].value
+    var res;
+    if(val.match(/^\d+$/)){
+        var dt = new Date(+val)
+        var month = dt.getMonth()+1
+        var date = dt.getDate()
+        var hour = dt.getHours()
+        var minu = dt.getMinutes()
+        
+        month = addZero(month)
+        date = addZero(date)
+        hour = addZero(hour)
+        minu = addZero(minu)
+
+        res = `${dt.getFullYear()}-${month}-${date} ${hour}:${minu}`
+    }else{
+        res = new Date(val).getTime()
+    }
+    console.log(res)
+    g['date-result'].value = res
+    g['date-result'].select()
+}
 docReady().then(e=>{
 
-    [].slice.call(document.querySelectorAll('#no-frame,#no-gif,#no-img')).forEach(ele => ele.addEventListener('click', handleObj, false));
-
-    g['show-date'].addEventListener('click', function(){
-        let val = g['show-date-input'].value
-        let res;
-        if(val.match(/^\d+$/)){
-            let dt = new Date(+val)
-            let month = dt.getMonth()+1
-            let date = dt.getDate()
-            month = month>9? month: ('0'+month)
-            date = date>9? date: ('0'+date)
-            res = `${dt.getFullYear()}-${month}-${date}`
-        }else{
-            res = new Date(val).getTime()
-        }
-        g['date-result'].value = res
-        g['date-result'].select()
+    var noAdvBtns = [].slice.call(document.querySelectorAll('#no-frame,#no-gif,#no-img'));
+    noAdvBtns.forEach(ele => {
+        ele.removeEventListener('click',handleObj)
+        ele.addEventListener('click', handleObj, false)
     });
 
-    g['diy-title'].addEventListener('click', function(){
+    g['showdate'].onclick=showDate;
+
+    g['diy-title'].onclick=function(){
         let title = g['diy-title-input'].value
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
             //active,audible,autoDiscardable,discarded,favIconUrl,height,highlighted,id,incognito,index,mutedInfo,pinned,selected,status,title,url,width,windowId
@@ -90,6 +130,6 @@ docReady().then(e=>{
                 response==null? alert("response为空...") : console.log(response);
             });//end  sendMessage   
         }); //end query
-    });
+    };
 })
 
