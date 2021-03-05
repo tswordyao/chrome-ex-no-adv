@@ -1,15 +1,16 @@
 console.log('%c-------no-adv-iframe 2020 running......','padding:20px;background:aqua;');
 
 var slice=Function.prototype.call.bind([].slice);
+var isTropper =   location.host.includes('trooper-test')
+var isStudy = location.host.includes('study.163')
+
 //document.addEventListener('DOMContentLoaded',e=>{
     setTimeout(e=>console.log('\n-----DOMContentLoaded 2020\n'),2020);
-
-    setInterval(intervalFn,9000)
 
     //setTimeout(function(){
         var style='';
         try{
-            [   '.wgt-daily',
+            var selectorList = [   '.wgt-daily',
                 '#passportbox.login-box',//blog.csdn
                 '.login-mark',
                 '#content_right.cr-offset',
@@ -39,7 +40,9 @@ var slice=Function.prototype.call.bind([].slice);
                 '.w350.fr',//'.article-right', //51jb
                 '.div_body #main_right',
                 'iframe'
-            ].forEach(s=>{
+            ]
+            
+            isStudy || selectorList.forEach(s=>{
                 style+=`${s}{visibility:hidden!important;}`;
                 //document.querySelectorAll(s).forEach( ele => ele.setAttribute('style',(ele.getAttribute('style')||'')+';visibility:hidden!important;') );
             });
@@ -53,6 +56,27 @@ var slice=Function.prototype.call.bind([].slice);
             console.error(e);
         }
     //},0);
+
+    // trooper站特有的定时检测任务
+  isTropper && setInterval(function intervalFn(){
+        let ele = document.querySelector('#board_table_name')
+        if(ele){
+            document.title = ele.innerText
+        }
+    },5000)
+
+    // 初始化study.163特有的定时轮询任务
+    if(isStudy){
+        var initItv = setInterval(()=>{
+            (document.querySelectorAll('.interest-guide-dialog,.um-order-phone-bind-modal')||[]).forEach(it=>it.remove())
+        },1500)
+    
+        // 15秒后取消初始定时轮询任务
+        setTimeout(e=>{
+            clearInterval(initItv)
+        },15*1000)
+    }
+
 
 //});
 
@@ -71,6 +95,7 @@ chrome.extension.onRequest.addListener( (request, sender, sendResponse) => {
 });
 
 
+// 这里能收到插件pop页面的通知，然后在当前访问页面环境下执行
 function extensionHandle(request, sender, sendResponse){
         // remove adv
         request.selector && document.querySelectorAll(request.selector).forEach(ele => {
@@ -87,11 +112,4 @@ function extensionHandle(request, sender, sendResponse){
         console.log("onMessage.addListener, 前端/后端/Popup收到:",request, sender);
         sendResponse("ct手动消息并给出popup返回值：ok");
         // console.log(document.querySelector('.div_body #main_right'))
-}
-
-function intervalFn(){
-    let ele = document.querySelector('#board_table_name')
-    if(ele){
-        document.title = ele.innerText
-    }
 }

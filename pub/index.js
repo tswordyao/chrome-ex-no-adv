@@ -24,3 +24,5 @@ const selectors=[
     '.fixRight_box',
     'iframe'
 ];
+
+console.log('----- chrome extensions: pub/index.js init')

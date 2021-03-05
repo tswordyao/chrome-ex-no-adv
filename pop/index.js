@@ -120,6 +120,7 @@ docReady().then(e=>{
         ele.addEventListener('click', handleObj, false)
     });
 
+    g['date-result'].value=Date.now() // 初始化默认显示当前时间戳
     g['showdate'].onclick=showDate;
 
     g['diy-title'].onclick=function(){
